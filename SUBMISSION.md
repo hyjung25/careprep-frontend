@@ -6,7 +6,7 @@ Fill these with verified real links. Deployment status is recorded in `VERIFICAT
 - [ ] Backend URL: **pending Render deployment**; copy it from Render, then verify `/health` and provider-backed chat/summary.
 - [x] Frontend repository: https://github.com/hyjung25/careprep-frontend
 - [x] Backend repository: https://github.com/hyjung25/careprep-backend
-- [ ] Portfolio: https://hyjung25.github.io/ — verify the CarePrep project link after publishing.
+- [x] Portfolio: https://hyjung25.github.io/#careprep — CarePrep preview and both repository links published.
 - [ ] Demo video: record 60–90 seconds using `DEMO.md`; add the actual shareable video URL.
 - [ ] Google Form: use the assignment's form URL (not supplied in this request), paste required links, and submit it yourself.
 - [x] Both repositories are public with separate Git histories.
