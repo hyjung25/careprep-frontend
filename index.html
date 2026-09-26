@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="CarePrep helps you describe symptoms and prepare notes for a healthcare visit. An educational prototype.">
+  <title>CarePrep · A little more prepared</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="CarePrep home"><span class="brand-icon" aria-hidden="true">✳</span>CarePrep<span class="prototype" data-i18n="prototype">CLASS PROJECT</span></a>
+    <label class="language-label"><span data-i18n="language">Language</span><select id="language"><option value="en">English</option><option value="ko">한국어</option></select></label>
+  </header>
+  <main>
+    <section class="intro">
+      <div class="eyebrow" data-i18n="eyebrow">A LITTLE MORE PREPARED</div>
+      <h1 data-i18n="heading">Your words. A clearer next conversation.</h1>
+      <p data-i18n="intro">Describe how you feel, explore trusted information, and bring your notes to a healthcare visit.</p>
+    </section>
+    <div class="layout">
+      <section class="chat-panel" aria-labelledby="chat-title">
+        <div class="panel-header"><div><span class="small-label" data-i18n="step1">01 / TALK IT THROUGH</span><h2 id="chat-title" data-i18n="chatTitle">How are you feeling?</h2></div><button id="clear" class="text-button" data-i18n="clear">Clear conversation</button></div>
+        <div class="privacy-notice"><span aria-hidden="true">↗</span><p data-i18n="privacy">Messages are sent to our backend and OpenAI. Avoid names, contact details, or other identifying information. Conversation history stays in this tab’s memory; the provider may retain requests under its policies.</p></div>
+        <div id="messages" class="messages" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
+          <div id="welcome" class="welcome"><div class="welcome-mark" aria-hidden="true">✳</div><h3 data-i18n="welcome">Start wherever you are.</h3><p data-i18n="welcomeText">I’ll help you put your symptoms into words and ask a few follow-up questions. I can’t diagnose or recommend medication.</p><div class="examples"><button data-example="0"></button><button data-example="1"></button><button data-example="2"></button></div><span class="scope" data-i18n="scope">Resource topics: headache, cough, and abdominal pain.</span></div>
+        </div>
+        <div id="loading" class="loading" role="status" hidden><span class="dot"></span><span data-i18n="loading">Preparing a response…</span></div>
+        <div id="error" class="error" role="alert" hidden></div>
+        <form id="chat-form" class="composer">
+          <label for="message" data-i18n="messageLabel">In your own words</label>
+          <textarea id="message" maxlength="1200" rows="3" required data-placeholder="placeholder" placeholder="What’s been bothering you?"></textarea>
+          <div class="composer-footer"><span id="counter">0 / 1200</span><button id="send" class="primary" type="submit" data-i18n="send">Send message ↗</button></div>
+          <p class="fine-print" data-i18n="memory">Only the latest 12 messages are kept. Refreshing or clearing removes your conversation.</p>
+        </form>
+      </section>
+      <aside class="sidebar">
+        <section class="summary-card" aria-labelledby="summary-title"><span class="small-label" data-i18n="step2">02 / BRING IT WITH YOU</span><h2 id="summary-title" data-i18n="summaryTitle">Your visit notes</h2><p data-i18n="summaryIntro">A simple summary of what you’ve shared, with the missing details made clear.</p><ul class="summary-preview"><li data-i18n="preview1">Your main concern</li><li data-i18n="preview2">Timing, severity & changes</li><li data-i18n="preview3">Questions for your clinician</li></ul><button id="generate" class="secondary" disabled data-i18n="generate">Generate visit summary</button><div id="summary-result" hidden><p class="fine-print" data-i18n="review">Review these notes before sharing. Quotes keep your original wording and language.</p><pre id="summary-text" tabindex="0"></pre><button id="copy" class="secondary" data-i18n="copy">Copy summary</button><span id="copy-status" role="status"></span></div></section>
+        <section class="sources-card" aria-labelledby="sources-title"><span class="small-label" data-i18n="grounded">GROUNDED IN PUBLIC RESOURCES</span><h2 id="sources-title" data-i18n="sourcesTitle">Sources for this reply</h2><div id="sources"><p class="muted" data-i18n="noSources">Relevant resources will appear here when available.</p></div><p class="fine-print" data-i18n="attribution">Source: MedlinePlus, National Library of Medicine. Korean passages are project translations, not official translations.</p></section>
+        <div class="limitations"><strong data-i18n="limitTitle">Preparation, with perspective.</strong><p data-i18n="limitText">This is an educational prototype, not a diagnostic service or a validated triage tool. If you may be in immediate danger, contact local emergency services. Don’t wait for a chat response.</p></div>
+      </aside>
+    </div>
+    <details class="settings"><summary data-i18n="settings">Connection settings</summary><p data-i18n="settingsText">Use only a backend you trust. Your messages will be sent to the address below. The address is not saved after refresh.</p><label for="backend-url" data-i18n="backendLabel">Backend URL</label><div class="settings-row"><input id="backend-url" type="url" placeholder="https://your-service.onrender.com" autocomplete="off"><button id="connect" class="secondary" data-i18n="connect">Apply & check</button></div><p id="connection-status" role="status"></p></details>
+  </main>
+  <footer><span>✳ CarePrep</span><span data-i18n="footer">Made for a more thoughtful healthcare conversation.</span></footer>
+</body>
+</html>
