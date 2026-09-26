@@ -18,4 +18,11 @@ No Render token/integration/account access is available in this session. Backend
 
 ## Release status
 
-Updated after publication below. Never interpret repository creation or a frontend deployment as proof that the live AI backend is operating.
+- Public backend repository: https://github.com/hyjung25/careprep-backend (separate root commit/history).
+- Public frontend repository: https://github.com/hyjung25/careprep-frontend (separate root commit/history).
+- Frontend deployed with branch-based GitHub Pages: https://hyjung25.github.io/careprep-frontend/ — GitHub build reported `built`; HTTP 200 verified on 2026-09-26.
+- The existing token lacks workflow scope; templates are provided without expanding credentials. Branch-based Pages succeeded.
+- Render backend URL: **not deployed / unavailable**. No Render credentials or integration and no OpenAI API key were available. Deploy `render.yaml`, set the backend key and CORS, update `config.js`, then test live.
+- Portfolio update uses an isolated checkout of `hyjung25/hyjung25.github.io`; the existing dirty local portfolio checkout is untouched.
+
+A frontend deployment does not establish that the live AI backend is operating.

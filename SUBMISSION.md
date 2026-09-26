@@ -2,14 +2,14 @@
 
 Fill these with verified real links. Deployment status is recorded in `VERIFICATION.md`.
 
-- [ ] Frontend URL: copy the successful GitHub Pages deployment URL.
+- [x] Frontend URL: https://hyjung25.github.io/careprep-frontend/ — deployed; backend configuration still pending.
 - [ ] Backend URL: **pending Render deployment**; copy it from Render, then verify `/health` and provider-backed chat/summary.
-- [ ] Frontend repository: https://github.com/hyjung25/careprep-frontend
-- [ ] Backend repository: https://github.com/hyjung25/careprep-backend
+- [x] Frontend repository: https://github.com/hyjung25/careprep-frontend
+- [x] Backend repository: https://github.com/hyjung25/careprep-backend
 - [ ] Portfolio: https://hyjung25.github.io/ — verify the CarePrep project link after publishing.
 - [ ] Demo video: record 60–90 seconds using `DEMO.md`; add the actual shareable video URL.
 - [ ] Google Form: use the assignment's form URL (not supplied in this request), paste required links, and submit it yourself.
-- [ ] Confirm both repositories are public and their Git histories remain separate.
+- [x] Both repositories are public with separate Git histories.
 - [ ] Set `OPENAI_API_KEY` only in Render, check compatible `OPENAI_MODEL`, CORS origin, rate/spend limits.
 - [ ] Update production URL in `config.js` and push the frontend. Verify the public origin, not just localhost.
 - [ ] Run a live synthetic English/Korean chat, follow-up, citation, summary, and boundary/error smoke test. Never record a key or identifying health information.

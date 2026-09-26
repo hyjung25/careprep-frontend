@@ -2,6 +2,10 @@
 
 A responsive English/Korean chat interface that helps users describe symptoms, explore a small set of authoritative general health resources, and prepare visit notes. Educational class prototype; **not a diagnostic service or validated triage tool**.
 
+**Frontend preview:** https://hyjung25.github.io/careprep-frontend/
+
+**Status:** frontend published; Render deployment and live OpenAI configuration are pending.
+
 Plain HTML, CSS and JavaScript; no build system, dependencies, API keys, analytics, or database. Its separate [FastAPI backend](https://github.com/hyjung25/careprep-backend) runs on Render and calls OpenAI. A working AI-backed deployment requires the backend URL and a server-side API key; the frontend does not simulate live AI.
 
 ## Local run

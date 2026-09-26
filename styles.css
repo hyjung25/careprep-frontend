@@ -480,3 +480,12 @@ footer {
   animation:none!important;
   transition:none!important}
 }
+
+.setup-notice {
+  background: #f4eee0;
+  color: #6d5632;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin: -10px 0 24px;
+  font-size: 13px;
+}

@@ -84,11 +84,15 @@ with sync_playwright() as p:
     page.reload()
     expect(page.get_by_role('heading',name='Start wherever you are.')).to_be_visible()
     # Frontend timeout independent of provider, with simulated hanging HTTP response.
-    page.route('**/api/chat', lambda route: None)
+    pending_routes = []
+    page.route('**/api/chat', lambda route: pending_routes.append(route))
     page.get_by_label('In your own words').fill('headache')
     page.get_by_role('button',name='Send message').click()
     expect(page.get_by_role('alert')).to_contain_text('timed out',timeout=48000)
     expect(page.get_by_role('button',name='Send message')).to_be_enabled()
+    for route in pending_routes:
+        route.abort('timedout')
+    page.unroute_all(behavior='wait')
     assert not errors, errors
     browser.close()
 print('PASS: synthetic browser flows, live local HTTP/CORS, labeled AI fixture, privacy, timeout, mobile and Korean.')

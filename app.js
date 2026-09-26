@@ -52,6 +52,8 @@ function setLanguage() {
   $('messages').setAttribute('aria-label', language === 'ko' ? '대화' : 'Conversation');
   $('error').hidden = true;
   $('copy-status').textContent = '';
+  $('setup-notice').hidden = Boolean(backendUrl);
+  $('setup-notice').textContent = backendUrl ? '' : t('missing');
 }
 function setBusy(value) {
   busy = value;
@@ -167,6 +169,7 @@ $('connect').addEventListener('click', () => {
   // A new endpoint must not receive a conversation intended for an old one.
   if (next !== backendUrl) $('clear').click();
   backendUrl = next;
+  $('setup-notice').hidden = true;
   run(async (signal, current) => {
     $('connection-status').textContent = t('pending');
     try {
