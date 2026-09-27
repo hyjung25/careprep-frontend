@@ -489,3 +489,7 @@ footer {
   margin: -10px 0 24px;
   font-size: 13px;
 }
+
+#summary-evidence {font-size:12px;margin:16px 0;color:var(--muted);}
+#summary-evidence summary {cursor:pointer;}
+#evidence-list p {white-space:pre-wrap;overflow-wrap:anywhere;}

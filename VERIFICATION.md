@@ -27,3 +27,9 @@ No Render token/integration/account access is available in this session. Backend
 - Portfolio update published: https://hyjung25.github.io/#careprep — verified Pages build `built` for commit `4562d1e`. An isolated checkout was used; the existing dirty local portfolio checkout is untouched.
 
 A frontend deployment does not establish that the live AI backend is operating.
+
+## Follow-up verification (2026-09-27)
+
+The initial credential gap described above was resolved **locally**. After fixing folder-move process paths, live browser chat and summary checks succeeded. Render deployment remains pending.
+
+The summary design now uses concise notes with cited user evidence and a second model grounding review; the earlier whole-message format is superseded. **45 backend tests passed**, including invalid evidence and rejected negation-loss checks. Live synthetic English and Korean summaries retained context without inferring causation and left generic chatbot questions out of clinician questions. User review is still necessary.

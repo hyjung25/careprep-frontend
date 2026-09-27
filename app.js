@@ -9,7 +9,7 @@ const strings = {
     scope:'Resource topics: headache, cough, and abdominal pain.', loading:'Preparing a response…', messageLabel:'In your own words', placeholder:'What’s been bothering you?', send:'Send message ↗',
     memory:'Only the latest 12 messages are kept. Refreshing or clearing removes your conversation.', step2:'02 / BRING IT WITH YOU', summaryTitle:'Your visit notes',
     summaryIntro:'A simple summary of what you’ve shared, with the missing details made clear.', preview1:'Your main concern', preview2:'Timing, severity & changes', preview3:'Questions for your clinician',
-    generate:'Generate visit summary', review:'Review these notes before sharing. Quotes keep your original wording and language.', copy:'Copy summary',
+    generate:'Generate visit summary', review:'Review these notes before sharing. Expand supporting messages to check them against your own words.', copy:'Copy summary',
     grounded:'GROUNDED IN PUBLIC RESOURCES', sourcesTitle:'Sources for this reply', noSources:'Relevant resources will appear here when available.',
     attribution:'Source: MedlinePlus, National Library of Medicine. Korean passages are project translations, not official translations.',
     limitTitle:'Preparation, with perspective.', limitText:'This is an educational prototype, not a diagnostic service or a validated triage tool. If you may be in immediate danger, contact local emergency services. Don’t wait for a chat response.',
@@ -30,7 +30,7 @@ const strings = {
     welcome:'편하게 이야기해 주세요.', welcomeText:'증상을 말로 정리하고 몇 가지 추가 질문을 드릴게요. 진단이나 약 추천은 할 수 없습니다.', scope:'자료 주제: 두통, 기침, 복통.',
     loading:'응답을 준비하고 있어요…', messageLabel:'본인의 말로 설명해 주세요', placeholder:'어떤 점이 불편하신가요?', send:'메시지 보내기 ↗', memory:'최근 메시지 12개만 보관합니다. 새로고침하거나 지우면 대화가 사라집니다.',
     step2:'02 / 진료 때 가져가기', summaryTitle:'나의 진료 메모', summaryIntro:'말씀하신 내용을 간단히 요약하고, 아직 확인하지 못한 정보를 표시합니다.', preview1:'주요 증상', preview2:'시작 시점, 정도와 변화', preview3:'의료진에게 할 질문',
-    generate:'진료 요약 만들기', review:'공유하기 전에 내용을 확인하세요. 인용문은 입력한 표현과 언어를 유지합니다.', copy:'요약 복사', grounded:'공공 보건 자료 기반', sourcesTitle:'이번 답변의 출처', noSources:'관련 자료가 있으면 여기에 표시됩니다.',
+    generate:'진료 요약 만들기', review:'공유하기 전에 내용을 확인하세요. 근거 메시지를 펼쳐 본인의 표현과 비교할 수 있습니다.', copy:'요약 복사', grounded:'공공 보건 자료 기반', sourcesTitle:'이번 답변의 출처', noSources:'관련 자료가 있으면 여기에 표시됩니다.',
     attribution:'출처: MedlinePlus, 미국 국립의학도서관. 한국어 문구는 프로젝트 번역이며 공식 번역이 아닙니다.', limitTitle:'진료 준비를 위한 도구입니다.', limitText:'교육용 프로토타입으로, 진단 서비스나 검증된 응급도 판단 도구가 아닙니다. 즉각적인 위험이 의심되면 현지 응급 서비스에 연락하세요. 답변을 기다리지 마세요.',
     settings:'연결 설정', settingsText:'신뢰하는 백엔드만 사용하세요. 메시지는 아래 주소로 전송됩니다. 새로고침하면 주소 설정이 초기화됩니다.', backendLabel:'백엔드 URL', connect:'적용 및 확인', footer:'더 나은 진료 대화를 위해 만들었습니다.',
     examples:['어제부터 두통이 있어요.','기침이 자꾸 나요.','배가 계속 불편해요.'], user:'나 · 사용자 진술', assistant:'CAREPREP', empty:'메시지를 입력하세요.', missing:'백엔드가 아직 연결되지 않았습니다. 아래 연결 설정에서 URL을 입력하세요.', invalidURL:'HTTPS 주소 또는 개발용 HTTP localhost를 사용하세요. 비밀번호, 쿼리, 프래그먼트는 포함하지 마세요.',
@@ -108,7 +108,7 @@ function showSources(sources) {
     card.append(a, detail); $('sources').append(card);
   });
 }
-function resetSummary() { $('summary-text').textContent = ''; $('summary-result').hidden = true; $('copy-status').textContent = ''; }
+function resetSummary() { $('summary-evidence').hidden = true; $('evidence-list').replaceChildren(); $('summary-text').textContent = ''; $('summary-result').hidden = true; $('copy-status').textContent = ''; }
 async function run(task) {
   if (busy) return;
   const version = generation;
@@ -150,6 +150,16 @@ $('generate').addEventListener('click', () => run(async (signal, current) => {
   if (!current()) return;
   if (typeof data.summary !== 'string') throw new Error(t('failed'));
   $('summary-text').textContent = (data.development_fixture ? t('fixture') + '\n\n' : '') + data.summary;
+  $('evidence-list').replaceChildren();
+  (data.sections || []).forEach(section => {
+    if (!section.notes?.length) return;
+    const p = document.createElement('p');
+    p.textContent = section.title + ': ' + section.notes.join(' ') + '\n' +
+      [...new Set(section.quotes)].map(q => '“' + q + '”').join('\n');
+    $('evidence-list').append(p);
+  });
+  $('summary-evidence').hidden = !$('evidence-list').childElementCount;
+  $('evidence-label').textContent = language === 'ko' ? '근거 메시지 보기' : 'View supporting messages';
   $('summary-result').hidden = false; $('copy-status').textContent = '';
 }));
 $('copy').addEventListener('click', async () => {

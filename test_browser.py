@@ -42,7 +42,7 @@ with sync_playwright() as p:
     expect(page.locator('#messages')).to_contain_text('Have you noticed any other symptoms?')
     page.get_by_role('button',name='Generate visit summary').click()
     expect(page.locator('#summary-text')).to_contain_text('I have a headache since yesterday.')
-    expect(page.locator('#summary-text')).to_contain_text('Not provided')
+    expect(page.locator('#summary-text')).to_contain_text('Still to clarify:')
     page.context.grant_permissions(['clipboard-read','clipboard-write'])
     page.get_by_role('button',name='Copy summary').click()
     expect(page.locator('#copy-status')).to_have_text('Copied to clipboard.')

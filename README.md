@@ -27,10 +27,10 @@ When the production URL is empty, the site shows an honest connection-setup erro
 ## Features and API communication
 
 - **Send message** → `POST /api/chat` with `{message, history, language}`. Returned `response`, `urgent`, and structured `sources` are shown as text/verified HTTPS source links.
-- **Generate visit summary** → `POST /api/summary` with `{history, language}`. The backend returns user-message quotes grouped by concern, timing, severity/progression, associated symptoms, volunteered medications/allergies, and clinician questions; empty categories are unknowns.
+- **Generate visit summary** → `POST /api/summary` with `{history, language}`. The backend returns concise notes grouped by concern, timing, severity/progression, associated symptoms, volunteered medications/allergies, relevant context, and explicit clinician questions. Missing categories are listed once. Expand **View supporting messages** to inspect the original evidence. The backend checks quote provenance and uses a second model review; users still need to review accuracy.
 - **Copy summary** uses the browser clipboard. If permission is blocked, select/copy the visible text manually.
 - **Clear conversation** empties messages, draft, sources, and notes; aborts an in-flight request; ignores late results.
-- Language changes interface text and future replies. Existing messages/quotes keep their original wording and language.
+- Language changes interface text and future replies. Existing chat messages remain unchanged. Newly generated notes use the selected language; supporting quotes keep their original wording.
 - The client blocks duplicate submissions; Ctrl/Cmd+Enter also sends. Enter alone inserts a newline (including Korean IME composition).
 - Errors distinguish missing credentials, invalid input, provider failure/timeout, rate limits, and connection failure. Failed drafts remain available. Requests time out after 45 seconds.
 - Up to 12 recent messages retained in tab memory/DOM; each sent content is at most 1200 characters. Notes cover only this bounded context. Earlier details must be re-entered if needed. No localStorage, sessionStorage, service worker, or database is used.
